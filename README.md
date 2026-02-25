@@ -1,6 +1,6 @@
 # PROJECT INFO
 ## PROJECT NAME
-HogwardsKnowledge
+HogwartsKnowledge
 ## AUTHOR  
 Fmami97 (github.com/Fmami97)
 ## CREATED
@@ -12,7 +12,7 @@ A React SPA that allows users to search and bookmark data from the Harry Potter 
 
 clone the project locally:
 ```bash
-git@github.com:Fmami97/HogwardsKnowledge.git
+git@github.com:Fmami97/HogwartsKnowledge.git
 ```
 
 make sure to create an Auth0 App by following this tutorial: https://auth0.com/docs/get-started 
