@@ -1,8 +1,8 @@
 import * as arraySorter from "../utils/arraySorter";
 
 import CharacterList from "../Components/CharacterList";
-import { redirect } from "react-router-dom";
-export default function Characters({ characters,searchTerm }) {
+import {searchResultText} from "../utils/translator";
+export default function Characters({ characters,searchTerm,setSearchTerm,setSearchType,language}) {
       
     if (!characters || characters.error) {
         return (
@@ -14,11 +14,6 @@ export default function Characters({ characters,searchTerm }) {
     }
     
     const charactersResult = arraySorter.getCharactersByName(characters, searchTerm);
-
-    if (charactersResult.length === 1) {
-        redirect(`/characters/${charactersResult[0].id}`);
-    }
-    else{
-        return <CharacterList characters={charactersResult} title="Search Results" />
-    }
+    return <CharacterList characters={charactersResult} setSearchType ={setSearchType} setSearchTerm = {setSearchTerm} title={searchResultText(language)} language={language}/>
+    
 }

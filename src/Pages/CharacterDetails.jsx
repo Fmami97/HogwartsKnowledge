@@ -1,12 +1,11 @@
-import { useParams } from 'react-router-dom';
-
 import CharacterList from "../Components/CharacterList";
+import {getCharactersInfoTitles} from "../utils/translator";
+export default function CharacterDetails({character,setSearchType,setSearchTerm,language}) {
+    console.log(language)
+    const titles = getCharactersInfoTitles(language)
 
-export default function CharacterDetails() {
-
-    const {index,characters}= useParams();
-
-    const character = characters.find(c => c.index === index);
+    console.log(character);
+    console.log(titles);
 
     return !character?(
         <div className="character-details">
@@ -18,13 +17,13 @@ export default function CharacterDetails() {
         <div className="column-container">
         <div className="character-details">
             <h2>{character.name}</h2>
-            <Image src={character.image} alt={character.fullname} className="character-image" />
-            <p><strong>Nickname:</strong> {character.nickname || "Unknown"}</p>
-            <p><strong>House:</strong> {character.hogwartsHouse || "Unknown"}</p>
-            <p><strong>Birthdate:</strong> {character.birthdate || "Unknown"}</p>
-            <p><strong>Played by:</strong> {character.interpretedBy || "Unknown"}</p>
+            <img src={character.image} alt={character.fullname} className="character-image" />
+            <p><strong>{titles.nickname}</strong> {character.nickname || "Unknown"}</p>
+            <p><strong>{titles.house}</strong> {character.hogwartsHouse || "Unknown"}</p>
+            <p><strong>{titles.birthdate}</strong> {character.birthdate || "Unknown"}</p>
+            <p><strong>{titles.interpretedBy}</strong> {character.interpretedBy || "Unknown"}</p>
             </div>
-            <CharacterList characters={character.relatedCharacters} title="Children of this character" />    
+            <CharacterList characters={character.relatedCharacters}setSearchType={setSearchType} setSearchTerm={setSearchTerm} title={titles.children}/>    
         </div>
 );
 }

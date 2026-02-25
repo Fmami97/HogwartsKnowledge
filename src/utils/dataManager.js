@@ -3,7 +3,6 @@ import * as arraySorter from "../utils/arraySorter";
 
 import Languages from "../Enums/Languages";
 
-
 async function getDataByLanguage(language) {
     return Promise.all([
         requests.getBooks(language),
@@ -11,7 +10,6 @@ async function getDataByLanguage(language) {
         requests.getHouses(language),
         requests.getSpells(language)
     ]).then(([books, characters, houses, spells]) => {
-
         return {
             books,
             characters: characters.map(character => ({
@@ -19,11 +17,13 @@ async function getDataByLanguage(language) {
                 //replaces the array containing the names of the children with an array containing the full info of the children
                 children: arraySorter.getChildrenInfo(character.children, characters)
             })),
-            houses: houses.map(house => ({
-                ...house,
-                //adds a new property to the house object containing an array of all the characters that belong to that house, using the filterCharactersByHouse function from arraySorter
-                characters: arraySorter.filterCharactersByHouse(characters, house.name)
-            })),
+            houses: houses.map(house => (
+                {
+                    ...house,
+                    //adds a new property to the house object containing an array of all the characters that belong to that house, using the filterCharactersByHouse function from arraySorter
+                    characters: arraySorter.getCharactersFromHouse(characters, house.house)
+                }
+            )),
             spells
         };
     }).catch(error => {
@@ -35,10 +35,32 @@ async function getDataByLanguage(language) {
     });
 }
 
+function getCacheData(key) {
+    const cached = localStorage.getItem(`@cache:${key}`);
+    if (!cached) return null;
+    const entry = JSON.parse(cached);
+    // delete the cache in case the entry is expired or contains an error
+    if (Date.now() > entry.expires || entry.data.error || entry.error) {
+        localStorage.removeItem(`@cache:${key}`);
+        return null;
+    }
+    return entry.data;
+};
+
+function createCache(key, data, minutes = 20) {
+    const cacheEntry = {
+        data,
+        expires: Date.now() + (minutes * 60 * 1000)
+    };
+    localStorage.setItem(`@cache:${key}`, JSON.stringify(cacheEntry));
+};
+
 
 //returns the data in the desired language.
 //if the data is already in the cache, it returns it from there, otherwise it fetches it from the API and stores it in the cache before returning it.
-export async function getData(language) {
+export async function getData(language, isOffline = false) {
+
+    const cacheKey = "hogwarts_knowledge" + language
     try {
         if (!Object.values(Languages).includes(language)) {
             return {
@@ -47,15 +69,34 @@ export async function getData(language) {
             };
         }
 
-        if (localStorage.getItem(language)) {
+        const cachedData = getCacheData(cacheKey);
 
-            const cachedData = JSON.parse(localStorage.getItem(language));
-            return cachedData;
+        //in case we work offline, we rely on fetching the local data only.
+        if (isOffline) {
+            if (cachedData) {
+                const data = cachedData
+                return data;
+            }
+            else {
+                throw new Error("No cached data available in offline mode");
+            }
         }
 
-        const data = await getDataByLanguage(language);
-        localStorage.setItem(language, JSON.stringify(data));
-        return data;
+        //if we have cached data, return it immediately otherwise, fetch new, fresh data.
+        if (cachedData && cachedData.data) {
+            return cachedData.data;
+        }
+        else {
+            const freshData = await getDataByLanguage(language);
+            if (freshData && !freshData.error) {
+                createCache(cacheKey, freshData);
+                return freshData;
+            }
+            else {
+                throw new Error("Couldn't fetch new fresh data, and cache is empty");
+            }
+        }
+
     } catch (error) {
         console.error("Error in getData:", error);
         return {

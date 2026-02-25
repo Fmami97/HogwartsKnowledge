@@ -4,7 +4,7 @@
 
 //this allows the app to avoid having to fetch the data multiple times, and to have a single source of truth for the data.
 
-import HogwartsHouses from "../Enums/HogwartsHouses";
+// import HogwartsHouses from "../Enums/HogwartsHouses";
 //with the provided list of names and characters, this function will return the data
 //of the characters that are children of the provided names
 export function getChildrenInfo(children, characters) {
@@ -24,14 +24,7 @@ export function getChildrenInfo(children, characters) {
 
 // returns all characters belonging to a specific house.
 export function getCharactersFromHouse(characters, house) {
-
-    //makes sure the house name is valid before making the request
-    if (!Object.values(HogwartsHouses).includes(house)) {
-        throw new Error("Invalid house name");
-    }
-    const filteredCharacters = characters.filter(character => character.hogwartsHouse === house);
-    return filteredCharacters;
-
+    return characters.filter(character => character.hogwartsHouse === house);
 }
 
 
@@ -40,17 +33,16 @@ function getRandomEntryFromArray(array) {
         throw new Error("Array is empty or undefined");
     }
     const randomIndex = Math.floor(Math.random() * array.length);
-    return array[randomIndex];
+    return [array[randomIndex]];
 }
 
 export function getRandomCharacter(characters) {
     try {
-        const character = getRandomEntryFromArray(characters);
-        return character;
+        return getRandomEntryFromArray(characters);
     }
     catch (error) {
         console.error("Error getting random character:", error);
-        return null;
+        return [];
     }
 }
 export function getRandomBook(books) {
@@ -60,24 +52,26 @@ export function getRandomBook(books) {
     }
     catch (error) {
         console.error("Error getting random book:", error);
-        return null;
+        return [];
     }
 }
 
 export function getRandomSpell(spells) {
     try {
-        const spell = getRandomEntryFromArray(spells);
-        return spell;
+        return getRandomEntryFromArray(spells);
     }
     catch (error) {
         console.error("Error getting random spell:", error);
-        return null;
+        return [];
     }
 }
 
 export function getCharactersByName(characters, searchTerm) {
     if (!searchTerm) {
         return characters;
+    }
+    if (searchTerm == "RANDOM") {
+        return getRandomCharacter(characters);
     }
     const lowerCaseSearchTerm = searchTerm.toLowerCase();
     return characters.filter(character => character.fullname.toLowerCase().includes(lowerCaseSearchTerm));
@@ -87,6 +81,9 @@ export function getBooksByTitle(books, searchTerm) {
     if (!searchTerm) {
         return books;
     }
+    if (searchTerm == "RANDOM") {
+        return getRandomBook(books);
+    }
     const lowerCaseSearchTerm = searchTerm.toLowerCase();
     return books.filter(book => book.title.toLowerCase().includes(lowerCaseSearchTerm));
 }
@@ -95,6 +92,16 @@ export function getSpellsByName(spells, searchTerm) {
     if (!searchTerm) {
         return spells;
     }
+    if (searchTerm == "RANDOM") {
+        return getRandomSpell(spells);
+    }
     const lowerCaseSearchTerm = searchTerm.toLowerCase();
     return spells.filter(spell => spell.spell.toLowerCase().includes(lowerCaseSearchTerm));
+}
+
+
+export function getHouseByName(houses, searchTerm) {
+
+    const lowerCaseSearchTerm = searchTerm.toLowerCase();
+    return houses.filter(house => house.house.toLowerCase().includes(lowerCaseSearchTerm))[0];
 }

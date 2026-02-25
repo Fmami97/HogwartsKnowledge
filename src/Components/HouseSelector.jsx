@@ -1,9 +1,9 @@
 
 
 import HogwartsHouses from "../Enums/HogwartsHouses"
-export function HouseSelector({selectedHouse, setSelectedHouse}) {
+export default function HouseSelector({selectedHouse, setSelectedHouse}) {
     return (
-        <div className="house-selector">
+        <div className="row-container">
             <label htmlFor="house-select">Select a House:</label>
             <select
                 id="house-select"
