@@ -40,3 +40,38 @@
 .read-the-docs {
   color: #888;
 }
+
+.row-container{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.column-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.language-button{
+  background-color: #68d391;
+  color: #1a1e27;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.language-button:hover {
+  background-color: #48bb78;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.language-button .selected{
+  background-color: #48bb78;
+  color: #fff;
+
+}

@@ -1,18 +1,44 @@
-# React + Vite
+# PROJECT INFO
+## PROJECT NAME
+HogwardsKnowledge
+## AUTHOR  
+Fmami97 (github.com/Fmami97)
+## CREATED
+20.02.2026
+## DESCRIPTION
+A React SPA that allows users to search and bookmark data from the Harry Potter franchise. Uses Auth0 for authentification.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# INSTALLATION
 
-Currently, two official plugins are available:
+clone the project locally:
+```bash
+git@github.com:Fmami97/HogwardsKnowledge.git
+```
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+make sure to create an Auth0 App by following this tutorial: https://auth0.com/docs/get-started 
 
-## React Compiler
+then fill in, these variables in your .env file:
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+VITE_AUTH0_DOMAIN={yourAuth0Domain}
+VITE_AUTH0_CLIENT_ID={yourClientId}
 
-Note: This will impact Vite dev & build performances.
 
-## Expanding the ESLint configuration
+go to the root of the project, then start the server:
+```bash
+ npm run dev
+```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+
+# TECHNOLOGIES
+
+This app:
+- Is made with the React Framework (Vite V7.3.1)
+- Uses the API from fedeperin (https://github.com/fedeperin/harry-potter-api-english)
+- Uses Auth0 for authentification
+- Has Font Awesome icons for User friendly Interface.
+
+
+# Documentation
+
+## Harry Potter API
+https://vlaurencena.github.io/harry-potter-openapi-swagger-ui/
