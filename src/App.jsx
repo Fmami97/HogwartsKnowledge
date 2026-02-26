@@ -146,16 +146,14 @@ function App() {
 
   return (
     <div>
-      <header>
-        <h1 className="main-title">Hogwarts
-            <FontAwesomeIcon icon="fa-solid fa-wand-sparkles" size="2xl" />
-          Knowledge
-        </h1>
-      </header>
         <div className="app-container">
-          
+          <header>
+    <h1 className="main-title">Hogwarts
+      <FontAwesomeIcon icon="fa-solid fa-wand-sparkles" size="2xl" />
+      Knowledge
+    </h1>
+  </header>
           {content}
-          <script src="https://kit.fontawesome.com/ab7a4ede5b.js" crossOrigin="anonymous"></script>
         </div>
     </div>
   );

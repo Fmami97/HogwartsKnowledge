@@ -1,14 +1,15 @@
 import * as arraySorter from "../utils/arraySorter";
 
-import CharacterList from "../Components/CharacterList";
+import "../Styles/housesPage.css";
+import Characters from "../Pages/Characters";
 import { getHouseInfoTitles } from "../utils/translator";
 import Languages from "../Enums/Languages";
 import {HogwartsHousesFrench,HogwartsHousesItalian,HogwartsHousesSpanish} from "../Enums/HogwartsHouses";
 export default function Houses({ houses,selectedHouse,setSearchType,setSearchTerm,language}) {
    
 
-    function houseColors(colors){
-        return <div className="row-container">{colors.map(c=><div style={"width:25;height:25;color:"+c}></div>)}</div>
+    function houseColors(...colors){
+        return <div className="row-container">{colors.map(c=><div className="house-colors" style={{backgroundColor:c}}></div>)}</div>
     }
 
     let translatedHouse;
@@ -27,21 +28,27 @@ export default function Houses({ houses,selectedHouse,setSearchType,setSearchTer
     }
 
 
-   let houseData = arraySorter.getHouseByName(houses,translatedHouse);
-   console.log(houseData)
+    let houseData = arraySorter.getHouseByName(houses,translatedHouse);
     let titles = getHouseInfoTitles(language);
+    let mainColor = "#2d313c";
+    let secondaryColor = "#e2e8f0";
+    if (houseData.colors.length > 1){
+        mainColor = houseData.colors[0];
+        secondaryColor = houseData.colors[1];
+
+    }
     return (
-        <div className="houses-page">
+        <div className="column-container">
             <h2>{selectedHouse}</h2>
-                <div className="house-details">
+                <div className="house-card" style={{backgroundColor:mainColor,color:secondaryColor}}>
                     <h3>{houseData.name} {houseData.emoji}</h3>
                     <p><strong>{titles.founder}</strong> {houseData.founder}</p>
-                    <p><strong>{titles.colors}</strong> {houseColors(houseData.colors)}</p>
+                    <div className="row-container"><strong>{titles.colors}</strong>{houseColors(mainColor,secondaryColor)}</div>
                     <p><strong>{titles.animal}</strong> {houseColors(houseData.colors)}</p>
 
                 </div>
             
-            <CharacterList characters={houseData.characters} setSearchType = {setSearchType} setSearchTerm={setSearchTerm} title={`${titles.members} ${selectedHouse}`} language={language} />
+            <Characters characters={houseData.characters} setSearchType = {setSearchType} setSearchTerm={setSearchTerm} language={language} title={`${titles.members} ${selectedHouse}`}/>
         </div>
     );
 }

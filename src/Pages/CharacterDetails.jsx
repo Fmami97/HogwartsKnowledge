@@ -4,9 +4,6 @@ export default function CharacterDetails({character,setSearchType,setSearchTerm,
     console.log(language)
     const titles = getCharactersInfoTitles(language)
 
-    console.log(character);
-    console.log(titles);
-
     return !character?(
         <div className="character-details">
             <h2>Character not found</h2>

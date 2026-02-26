@@ -1,0 +1,25 @@
+.character-card{
+    padding: 1rem;
+    display:flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+
+}
+
+.characters-list{
+    overflow-y: auto;
+}
+
+.character-image{
+    width:auto;
+    height:300px;
+}
+
+h3{
+    margin:10px 0 2px 0;
+}
+p{
+    margin:0px;
+    font-style: italic;
+}
