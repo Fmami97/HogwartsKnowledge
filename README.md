@@ -5,27 +5,35 @@ HogwartsKnowledge
 Fmami97 (github.com/Fmami97)
 ## CREATED
 20.02.2026
+
+## FINISHED (more or less)
+19.03.2026
+
 ## DESCRIPTION
-A React SPA that allows users to search and bookmark data from the Harry Potter franchise. Uses Auth0 for authentification.
+A React SPA that allows users to search various data from the Harry Potter franchise in 4 different languages.
+This project's aim is for academic / personal use only, and uses an API found in [https://free-apis.github.io] (more details below).
 
 # INSTALLATION
 
-clone the project locally:
 ```bash
-git@github.com:Fmami97/HogwartsKnowledge.git
+    # clone the project locally:
+    git clone git@github.com:Fmami97/HogwartsKnowledge.git
+    # go to the root of the project
+    cd HogwartsKnowledge
+    #install the dependencies
+    npm install
+    #run the project locally
+    npm run dev
 ```
-
-make sure to create an Auth0 App by following this tutorial: https://auth0.com/docs/get-started 
-
-then fill in, these variables in your .env file:
-
-VITE_AUTH0_DOMAIN={yourAuth0Domain}
-VITE_AUTH0_CLIENT_ID={yourClientId}
+## SIDE NOTE:
+Since Cors policies don't allow localhost to be used to fetch data on a server, you will need an extension that 
+provides access to your website, or run your app through a server
 
 
-go to the root of the project, then start the server:
+# MAKE A PRODUCTION BUILD
+once satisfied with all changes build the project to place it in your web domain
 ```bash
- npm run dev
+    npm run build
 ```
 
 
@@ -33,12 +41,13 @@ go to the root of the project, then start the server:
 
 This app:
 - Is made with the React Framework (Vite V7.3.1)
-- Uses the API from fedeperin (https://github.com/fedeperin/harry-potter-api-english)
-- Uses Auth0 for authentification
+- Uses the API from fedeperin [https://github.com/fedeperin/harry-potter-api-english]
 - Has Font Awesome icons for User friendly Interface.
+- Used the Chrome extension Allow CORS: Access-Control-Allow-Origin to run locally the code without CORS restrictions.
+- Used the Chrome extesion React Developer Tools to debug more efficiently in React
 
-
-# Documentation
+# API DOCUMENTATION
 
 ## Harry Potter API
-https://vlaurencena.github.io/harry-potter-openapi-swagger-ui/
+- uses the Harry Potter API from [https://vlaurencena.github.io/harry-potter-openapi-swagger-ui/]
+
