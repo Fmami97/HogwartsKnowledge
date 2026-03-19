@@ -1,0 +1,54 @@
+input{
+    background-color: #616881;
+    cursor: pointer;
+    font-size: 16pt;
+    color:#f0f0f0;
+}
+input::placeholder{
+    color:#f0f0f0
+
+}
+input:focus{
+    border:2px #f0f0f0 solid;
+}
+
+label{
+    font-size: 16pt;
+    flex-grow: 1;
+}
+
+select{
+    text-align: center;
+    background-color: #616881;
+    cursor: pointer;
+    font-size: 16pt;
+    color:#f0f0f0;
+    flex-grow:2;
+}
+select:focus{
+    border:2px #f0f0f0 solid;
+}
+
+button{
+    background-color: #616881;
+    cursor: pointer;
+    font-size: 16pt;
+    color:#f0f0f0;
+    height: 50px;
+    border-radius: 20px;
+    border:2px #f0f0f0 solid;
+}
+
+button:hover{
+    background-color: #f0f0f0;
+    cursor: pointer;
+    color:#262a33
+
+}
+
+.searchbar-container{
+   display:flex;
+   flex-direction: column;
+   gap:15px;
+   margin: 10px;
+}

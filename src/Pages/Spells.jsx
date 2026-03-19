@@ -1,5 +1,5 @@
 import * as arraySorter from "../utils/arraySorter";
-
+import "../Styles/SpellsPage.css"
 export default function Spells({ spells,searchTerm }) {
       
     if (!spells || spells.error) {

@@ -1,5 +1,19 @@
 import Languages from "../Enums/Languages";
 
+
+export function offlineModeText(selectedLanguage) {
+    switch (selectedLanguage) {
+        case Languages.ENGLISH:
+            return "Offline mode";
+        case Languages.FRENCH:
+            return "Mode hors-ligne";
+        case Languages.ITALIAN:
+            return "Modalità offline";
+        case Languages.SPANISH:
+            return "Modo sin conexión";
+    }
+}
+
 export function loadingText(selectedLanguage) {
     switch (selectedLanguage) {
         case Languages.ENGLISH:
@@ -43,50 +57,18 @@ export function emptyText(selectedLanguage) {
     }
 }
 
-export function searchText(selectedLanguage) {
+export function emptyCharacterText(selectedLanguage) {
     switch (selectedLanguage) {
         case Languages.ENGLISH:
-            return "Search";
+            return "No data available for this character";
         case Languages.FRENCH:
-            return "Rechercher";
+            return "Aucune donnée disponible pour ce personnage";
         case Languages.ITALIAN:
-            return "Ricerca";
+            return "Nessun dato disponibile su questa persona";
         case Languages.SPANISH:
-            return "Buscar";
-        default:
-            return "Search";
+            return "No se encontró ningun dato sobre esta persona";
     }
 }
-
-export function searchResultText(selectedLanguage) {
-    switch (selectedLanguage) {
-        case Languages.ENGLISH:
-            return "Search results";
-        case Languages.FRENCH:
-            return "Résultats";
-        case Languages.ITALIAN:
-            return "Risultati";
-        case Languages.SPANISH:
-            return "Resultados";
-    }
-}
-
-
-// export function getHouseNames(selectedLanguage) {
-//     switch (selectedLanguage) {
-//         case Languages.ENGLISH:
-//             return { gryffindor: "Gryffindor", hufflepuff: "Hufflepuff", ravenclaw: "Ravenclaw", slytherin: "Slytherin" }
-//         case Languages.FRENCH:
-//             return { gryffindor: "Gryffondor", hufflepuff: "Poufsouffle", ravenclaw: "Serdaigle", slytherin: "Serpentard" }
-
-//         case Languages.ITALIAN:
-//             return { gryffindor: "Grifondoro", hufflepuff: "Tassorosso", ravenclaw: "Corvonero", slytherin: "Serpeverde" }
-
-//         case Languages.SPANISH:
-//             return { gryffindor: "Gryffindor", hufflepuff: "Hufflepuff", ravenclaw: "Ravenclaw", slytherin: "Slytherin" }
-
-//     }
-// }
 
 export function getHouseInfoTitles(selectedLanguage) {
     switch (selectedLanguage) {
@@ -105,15 +87,49 @@ export function getHouseInfoTitles(selectedLanguage) {
 export function getCharactersInfoTitles(selectedLanguage) {
     switch (selectedLanguage) {
         case Languages.ENGLISH:
-            return { nickname: "Nickname : ", house: "House : ", birthdate: "Birthdate : ", interpretedBy: "Actor : ", children: "Children" }
+            return { characters: "Characters", nickname: "Nickname : ", house: "House : ", birthdate: "Birthdate : ", interpretedBy: "Actor / Actress : ", children: "Children" }
         case Languages.FRENCH:
-            return { nickname: "Surnom : ", house: "Maison : ", birthdate: "Date de naissance : ", interpretedBy: "Acteur : ", children: "Enfants" }
+            return { characters: "Personnages", nickname: "Surnom : ", house: "Maison : ", birthdate: "Date de naissance : ", interpretedBy: "Acteur / ctrice : ", children: "Enfants" }
 
         case Languages.ITALIAN:
-            return { nickname: "Soprannome : ", house: "Casa : ", birthdate: "Data di nascita : ", interpretedBy: "Attore : ", children: "Figli" }
+            return { characters: "Personaggi", nickname: "Soprannome : ", house: "Casa : ", birthdate: "Data di nascita : ", interpretedBy: "Attore / Attrice : ", children: "Figli" }
 
 
         case Languages.SPANISH:
-            return { nickname: "Apodo : ", house: "Casa : ", birthdate: "Fecha de nacimiento : ", interpretedBy: "Actor : ", children: "Hijos" }
+            return { characters: "Personajes", nickname: "Apodo : ", house: "Casa : ", birthdate: "Fecha de nacimiento : ", interpretedBy: "Actor / Actriz : ", children: "Hijos" }
+    }
+}
+
+
+
+export function getBooksInfoTitles(selectedLanguage) {
+    switch (selectedLanguage) {
+        case Languages.ENGLISH:
+            return { books: "Books", title: "Title : ", releaseDate: "Release date : ", description: "Description : ", pages: "Number of pages : " }
+        case Languages.FRENCH:
+            return { books: "Livres", title: "Titre : ", releaseDate: "Date de sortie : ", description: "Description : ", pages: "Nombre de pages : " }
+
+        case Languages.ITALIAN:
+            return { books: "Libri", title: "Titolo : ", releaseDate: "Data di rilascio : ", description: "Descrizione : ", pages: "Numero di pagine : " }
+
+        case Languages.SPANISH:
+            return { books: "Libros", title: "Tìtulo : ", releaseDate: "Fecha de lanzamiento : ", description: "Descripción : ", pages: "Número de páginas : " }
+    }
+}
+
+
+export function getSearchInfoTitles(selectedLanguage) {
+    switch (selectedLanguage) {
+        case Languages.ENGLISH:
+            return { search: "Search", searchResult: "Search results", random: "Random", reset: "Reset", characters: "Characters", books: "Books", houses: "Houses", house: "House", spells: "Spells" }
+        case Languages.FRENCH:
+            return { search: "Rechercher", searchResult: "Résultats", random: "Aléatoire", reset: "Effacer", characters: "Personnages", books: "Livres", houses: "Maisons", house: "Maison", spells: "Sorts" }
+
+        case Languages.ITALIAN:
+            return { search: "Ricercare", searchResult: "Risultati", random: "Aleatorio", reset: "Cancellare", characters: "Personaggi", books: "Libri", houses: "Case", house: "Casa", spells: "Incantesimi" }
+
+        case Languages.SPANISH:
+            return { search: "Buscar", searchResult: "Resultados", random: "Aleatorio", reset: "Borrar", characters: "Personajes", books: "Libros", houses: "Casas", house: "Casa", spells: "Hechizos" }
+
     }
 }

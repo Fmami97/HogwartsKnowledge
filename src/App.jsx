@@ -1,48 +1,42 @@
-// import { useAuth0 } from '@auth0/auth0-react';
-// import LoginButton from './Components/LoginButton';
-// import LogoutButton from './Components/LogoutButton';
-// import Profile from './Components/Profile';
+
+import "./Styles/App.css"
+
+//UTILITIES
 import { useEffect, useState } from 'react';
-import "./app.css"
-
-import { loadingText ,errorText} from './utils/translator';
-
+import { loadingText ,errorText,offlineModeText} from './utils/translator';
 import { getData } from './utils/dataManager';
+import {getHouseIcons} from "./utils/arraySorter"
+
 //ENUMS
 import Languages from './Enums/Languages';
 import SearchTypes from './Enums/SearchTypes';
+import HogwartsHouses from './Enums/HogwartsHouses';
+
 //COMPONENTS
 import Searchbar from './Components/Searchbar';
 import LanguageSelection from './Components/LanguageSelection';
+//PAGES
 import Characters from './Pages/Characters';
-
 import Books from './Pages/Books';
 import Houses from './Pages/Houses';
 import Spells from './Pages/Spells';
 
 
-
+//LIBRARIES
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { library } from '@fortawesome/fontawesome-svg-core'
-
-/* import all the icons in Free Solid, Free Regular, and Brands styles */
 import { fas } from '@fortawesome/free-solid-svg-icons'
-import { far } from '@fortawesome/free-regular-svg-icons'
-import { fab } from '@fortawesome/free-brands-svg-icons'
-import HogwartsHouses from './Enums/HogwartsHouses';
 
 
 function App() {
   
+  //adds the fontAwesome icon (the magic wand)
+  library.add(fas)
 
-  library.add(fas, far, fab)
-
-  // const { isAuthenticated, isLoading, error } = useAuth0();
-  //TODO: since data is async, we need to handle the loading and error states in the app. We can use a state variable to track the loading state and another one to track any errors that might occur during the data fetching process. We can then conditionally render different components based on these states.
   const [isLoading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const [language,setLanguage] = useState(Languages.FRENCH);
+  const [language,setLanguage] = useState(Languages.ENGLISH);
 
   //depending on what is being searched, logic differs slighly
   const [searchTerm, setSearchTerm] = useState("");
@@ -55,6 +49,8 @@ function App() {
   const [spells, setSpells] = useState([]);
 
   const [isOnline,setIsOnline] = useState(navigator.onLine);
+  const [offlineMode,setOfflineMode] = useState(!isOnline);
+
   useEffect(()=>{
     const handleOnline = ()=>setIsOnline(true);
     const handleOffline = ()=>setIsOnline(false);
@@ -67,13 +63,76 @@ function App() {
   },[]);
 
 
+  function handleData(data){
+    // Update the state with the fetched data
+    if(data && !data.error){
+        setError(null);
+        setBooks(data.books);
+        setCharacters(data.characters);
+        setHouses(data.houses);
+        setSpells(data.spells);
+        setLoading(false);
+    }
+    else{
+        //if the object contains an error to display
+      if(data && data.error){
+          throw new Error(data.error);
+      }
+      else{
+          //default error message otherwise.
+          throw new Error("No data found!");
+      }
+    }
+  }
+
   //whenever the language changes, the app will fetch the data
   // and re-render the page.
   useEffect(() => {
+
+    if(offlineMode){
+      getData(language,true).then(data => {
+          console.log("hello")
+          handleData(data);
+  
+        }).catch(cacheError=>{
+         if(cacheError.message){
+            setError(cacheError.message);
+          }else{
+            setError(cacheError);
+          }
+        setLoading(false);
+
+      });
+    }
+    else{
     getData(language,!isOnline).then(data => {
+      handleData(data);
+    }).catch(error => {
+      console.error(error.message)
+      //if fetching online fails, tries offline mode
+      //if already offline, skips this step
+      setOfflineMode(true);
+    });
+    }
+  }, [language,isOnline,offlineMode]);
+
+
+  function handleSetSearchType(newSearchType){
+    setSearchType(newSearchType);
+    setSearchTerm("");
+  }
+
+  function handleSetLanguage(newLanguage){
+    
+    if(newLanguage==language){
+      return
+    }
+    setLoading(true);
+    if(!isOnline)
+    {
+    getData(newLanguage,true).then(data => {
       setLoading(false);
       // Update the state with the fetched data
-
       if(data && !data.error){
         setBooks(data.books);
         setCharacters(data.characters);
@@ -92,10 +151,18 @@ function App() {
       }
 
     }).catch(error => {
-      setError(error.message);
+      if(error.message){
+        setError(error.message);
+      }else{
+        setError(error);
+      }
       setLoading(false);
     });
-  }, [language,isOnline]);
+  }
+    setLanguage(newLanguage);
+
+  }
+
 
   let content;
 
@@ -113,7 +180,7 @@ function App() {
         <div className="error-state">
           <div className="error-title">Oops!</div>
           <div className="error-message">{errorText(language)}</div>
-          <div className="error-sub-message">"{error}"</div>
+          <div className="error-sub-message">"{error && error.message ? error.message : error}"</div>
         </div>
     );
   }
@@ -121,22 +188,23 @@ function App() {
     let page; 
     switch(searchType){
       case SearchTypes.BOOKS:
-        page = <Books books={books} searchTerm={searchTerm}/>;
+        page = <Books books={books} searchTerm={searchTerm} language={language}/>;
         break;
       case SearchTypes.CHARACTERS:
-        page = <Characters characters={characters} searchTerm={searchTerm} setSearchTerm={setSearchTerm}  setSearchType= {setSearchType} language={language}/>;
+        page = <Characters characters={characters} searchTerm={searchTerm} setSearchTerm={setSearchTerm}  setSearchType= {handleSetSearchType} language={language}/>;
         break;
       case SearchTypes.HOUSES:
-        page = <Houses houses={houses} selectedHouse={selectedHouse} setSearchType= {setSearchType} setSearchTerm={setSearchTerm} language={language}/>;
+        page = <Houses houses={houses} selectedHouse={selectedHouse} setSearchType= {handleSetSearchType} setSearchTerm={setSearchTerm} language={language}/>;
       break;
         case SearchTypes.SPELLS:
         page = <Spells spells={spells} searchTerm={searchTerm}/>
         break;
     }
+
+    let houseIcons = getHouseIcons(houses);
         content = (
             <div className="main-card-wrapper">
-            <LanguageSelection language={language} setLanguage={setLanguage} languages={Object.values(Languages)} />
-            <Searchbar searchTerm={searchTerm} setSearchTerm={setSearchTerm} searchType={searchType} setSearchType={setSearchType} selectedHouse={selectedHouse} setSelectedHouse = {setSelectedHouse} language={language}/> 
+            <Searchbar searchTerm={searchTerm} setSearchTerm={setSearchTerm} searchType={searchType} setSearchType={handleSetSearchType} selectedHouse={selectedHouse} setSelectedHouse = {setSelectedHouse} houseIcons={houseIcons} language={language}/> 
             {page}
           </div>
         )
@@ -146,14 +214,19 @@ function App() {
 
   return (
     <div>
-        <div className="app-container">
           <header>
-    <h1 className="main-title">Hogwarts
-      <FontAwesomeIcon icon="fa-solid fa-wand-sparkles" size="2xl" />
-      Knowledge
-    </h1>
-  </header>
+            <h1 className="main-title">Hogwarts
+            <FontAwesomeIcon icon="fa-solid fa-wand-sparkles" size="2xl" />
+            Knowledge
+            </h1>
+          </header>
+        <div className="app-container"> 
+          {offlineMode && <div className="offline-mode"><h2>{offlineModeText(language)}</h2></div>}
+            <LanguageSelection language={language} setLanguage={handleSetLanguage} languages={Object.values(Languages)} />
+
           {content}
+          {offlineMode && <div className="offline-mode"><h2>{offlineModeText(language)}</h2></div>}
+
         </div>
     </div>
   );

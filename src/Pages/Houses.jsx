@@ -1,54 +1,61 @@
 import * as arraySorter from "../utils/arraySorter";
 
 import "../Styles/housesPage.css";
-import Characters from "../Pages/Characters";
+
 import { getHouseInfoTitles } from "../utils/translator";
 import Languages from "../Enums/Languages";
 import {HogwartsHousesFrench,HogwartsHousesItalian,HogwartsHousesSpanish} from "../Enums/HogwartsHouses";
+import CharacterList from "../Components/CharacterList";
+import { useCallback } from "react";
 export default function Houses({ houses,selectedHouse,setSearchType,setSearchTerm,language}) {
    
-
     function houseColors(...colors){
-        return <div className="row-container">{colors.map(c=><div className="house-colors" style={{backgroundColor:c}}></div>)}</div>
+        return <div className="row-container">{colors.map(c=><div key={"color_"+c} className="house-colors" style={{backgroundColor:c}}></div>)}</div>
     }
+    const getTranslatedHouseName = useCallback((language)=>{
+         switch(language){
+            case Languages.FRENCH:
+            return HogwartsHousesFrench[selectedHouse];
+            case Languages.ITALIAN:
+             return HogwartsHousesItalian[selectedHouse];
+            case Languages.SPANISH:
+             return  HogwartsHousesSpanish[selectedHouse];
+            default:
+             return selectedHouse
+         }
+    },[selectedHouse])
 
-    let translatedHouse;
-    switch(language){
-        case Languages.FRENCH:
-        translatedHouse = HogwartsHousesFrench[selectedHouse];
-        break;
-        case Languages.ITALIAN:
-        translatedHouse = HogwartsHousesItalian[selectedHouse];
-        break;
-        case Languages.SPANISH:
-        translatedHouse = HogwartsHousesSpanish[selectedHouse];
-        break;
-        default:
-            translatedHouse = selectedHouse
-    }
-
+    const translatedHouse= getTranslatedHouseName(language);
 
     let houseData = arraySorter.getHouseByName(houses,translatedHouse);
-    let titles = getHouseInfoTitles(language);
+
+
+    const titles = getHouseInfoTitles(language);
+
     let mainColor = "#2d313c";
     let secondaryColor = "#e2e8f0";
+
+    let characters = houseData.characters;
+    if (characters.length <2){
+        characters = [characters]
+    }
+
     if (houseData.colors.length > 1){
         mainColor = houseData.colors[0];
         secondaryColor = houseData.colors[1];
 
     }
+
     return (
         <div className="column-container">
-            <h2>{selectedHouse}</h2>
-                <div className="house-card" style={{backgroundColor:mainColor,color:secondaryColor}}>
-                    <h3>{houseData.name} {houseData.emoji}</h3>
+                <div className="house-card">
+                    <h2>{translatedHouse} {houseData.emoji}</h2>
                     <p><strong>{titles.founder}</strong> {houseData.founder}</p>
                     <div className="row-container"><strong>{titles.colors}</strong>{houseColors(mainColor,secondaryColor)}</div>
-                    <p><strong>{titles.animal}</strong> {houseColors(houseData.colors)}</p>
 
                 </div>
             
-            <Characters characters={houseData.characters} setSearchType = {setSearchType} setSearchTerm={setSearchTerm} language={language} title={`${titles.members} ${selectedHouse}`}/>
+            <CharacterList charactersResult={characters} setSearchType = {setSearchType} setSearchTerm={setSearchTerm} title={`${titles.members} ${translatedHouse}`} language={language} />
         </div>
     );
 }

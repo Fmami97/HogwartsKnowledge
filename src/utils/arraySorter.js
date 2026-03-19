@@ -11,9 +11,10 @@ export function getChildrenInfo(children, characters) {
     if (!children || children.length === 0) {
         return [];
     }
-
     const childrenInfo = children.map(childName => {
-        const childInfo = characters.find(character => character.fullname === childName);
+
+        const childInfo = characters.find(character => character.fullName.toLowerCase() === childName.toLowerCase());
+
         return childInfo || { fullname: childName, error: "Character data not found" };
     });
 
@@ -70,11 +71,23 @@ export function getCharactersByName(characters, searchTerm) {
     if (!searchTerm) {
         return characters;
     }
+
     if (searchTerm == "RANDOM") {
         return getRandomCharacter(characters);
     }
     const lowerCaseSearchTerm = searchTerm.toLowerCase();
-    return characters.filter(character => character.fullname.toLowerCase().includes(lowerCaseSearchTerm));
+    let filteredCharacters = characters.filter(character => character.fullName.toLowerCase().includes(lowerCaseSearchTerm));
+    let preciseCharacter = []
+
+    // a second set of filtering is done in case there are similar names
+    if (filteredCharacters.length == 2) {
+        preciseCharacter = filteredCharacters.filter(characters => characters.fullName.toLowerCase() === lowerCaseSearchTerm)
+    }
+    if (preciseCharacter.length != 1) {
+        return filteredCharacters
+    }
+    //this will only get returned if the search matches exactly the full name of the character.
+    return preciseCharacter
 }
 
 export function getBooksByTitle(books, searchTerm) {
@@ -103,5 +116,11 @@ export function getSpellsByName(spells, searchTerm) {
 export function getHouseByName(houses, searchTerm) {
 
     const lowerCaseSearchTerm = searchTerm.toLowerCase();
-    return houses.filter(house => house.house.toLowerCase().includes(lowerCaseSearchTerm))[0];
+    return houses.filter(house => house.house.toLowerCase() === (lowerCaseSearchTerm))[0];
+}
+
+
+//should always fetch the houses icons in the same order
+export function getHouseIcons(houses) {
+    return houses.map(h => h.emoji)
 }

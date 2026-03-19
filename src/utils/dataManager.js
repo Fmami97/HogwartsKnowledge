@@ -73,8 +73,11 @@ export async function getData(language, isOffline = false) {
 
         //in case we work offline, we rely on fetching the local data only.
         if (isOffline) {
+            console.log(cachedData)
             if (cachedData) {
                 const data = cachedData
+                console.log(data)
+
                 return data;
             }
             else {

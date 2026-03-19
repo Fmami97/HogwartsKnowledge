@@ -1,10 +1,12 @@
 
-import { searchText } from "../utils/translator";
+import { getSearchInfoTitles } from "../utils/translator";
 import SearchTypes from "../Enums/SearchTypes"
 export default function SearchTypeSelector({searchType, setSearchType,language}) {
+    let searchInfoTitles = getSearchInfoTitles(language)
+    
     return (
         <div className="row-container">
-            <label htmlFor="search-select">{searchText(language)}</label>
+            <label htmlFor="search-select">{searchInfoTitles.search}</label>
             <select
                 id="search-select"
                 value={searchType}
@@ -12,7 +14,7 @@ export default function SearchTypeSelector({searchType, setSearchType,language})
             >
                 {Object.values(SearchTypes).map((search) => (
                     <option key={search} value={search}>
-                        {search}
+                        {searchInfoTitles[search]}
                     </option>
                 ))}
             </select>

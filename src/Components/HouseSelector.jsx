@@ -1,21 +1,29 @@
 
 
 import HogwartsHouses from "../Enums/HogwartsHouses"
-export default function HouseSelector({selectedHouse, setSelectedHouse}) {
+
+export default function HouseSelector({selectedHouse, setSelectedHouse,houseIcons}) {
+    
+    //IMPORTANT: both the icons and the enum must be on the same order for this to work
+
+    let houses = Object.keys(HogwartsHouses);
+
+    let content=[];
+    for(let i = 0; i < houseIcons.length;i++){
+        
+        content.push(
+        <button key={HogwartsHouses[houses[i]]} className={`house-button ${selectedHouse === HogwartsHouses[houses[i]] ? "active" : ""}`} onClick={() => setSelectedHouse(HogwartsHouses[houses[i]])}>
+                    
+                    <span>{houseIcons[i]}</span>
+                </button>
+                )
+    }
+
+
     return (
         <div className="row-container">
-            <label htmlFor="house-select">Select a House:</label>
-            <select
-                id="house-select"
-                value={selectedHouse}
-                onChange={(e) => setSelectedHouse(e.target.value)}
-            >
-                {Object.values(HogwartsHouses).map((house) => (
-                    <option key={house} value={house}>
-                        {house}
-                    </option>
-                ))}
-            </select>
+        
+            {content}
         </div>
     );
 }

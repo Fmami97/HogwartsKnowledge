@@ -14,10 +14,10 @@ export const HogwartsHousesFrench = {
 }
 
 export const HogwartsHousesItalian = {
-    Gryffindor: "Gryffondor",
+    Gryffindor: "Grifondoro",
     Hufflepuff: "Tassorosso",
-    Ravenclaw: "Serpeverde",
-    Slytherin: "Serpentard",
+    Ravenclaw: "Corvonero",
+    Slytherin: "Serpeverde",
 }
 
 export const HogwartsHousesSpanish = {
