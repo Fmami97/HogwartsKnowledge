@@ -1,6 +1,6 @@
 import * as arraySorter from "../utils/arraySorter";
 
-import "../Styles/housesPage.css";
+import "../Styles/HousesPage.css";
 
 import { getHouseInfoTitles } from "../utils/translator";
 import Languages from "../Enums/Languages";
