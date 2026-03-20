@@ -1,5 +1,7 @@
 import Languages from "../Enums/Languages";
 
+//contains all variations of the website's headings and texts in 4 different language
+
 
 export function offlineModeText(selectedLanguage) {
     switch (selectedLanguage) {
@@ -69,6 +71,11 @@ export function emptyCharacterText(selectedLanguage) {
             return "No se encontró ningun dato sobre esta persona";
     }
 }
+
+
+//using objects for a more centralized source of data for a specific page instead 
+//of having a function return a single line of text.
+
 
 export function getHouseInfoTitles(selectedLanguage) {
     switch (selectedLanguage) {

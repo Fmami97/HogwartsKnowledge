@@ -1,12 +1,13 @@
 import * as arraySorter from "../utils/arraySorter";
+import { getSearchInfoTitles ,emptyText,errorText } from "../utils/translator";
 import "../Styles/SpellsPage.css"
-export default function Spells({ spells,searchTerm }) {
+export default function Spells({ spells,searchTerm,language }) {
       
     if (!spells || spells.error) {
         return (
             <div className="spells-page">
-                <h2>Spells</h2>
-                <p>Failed to load spells: {spells?.error || "Unknown error"}</p>
+                <h1>{getSearchInfoTitles(language).spells}</h1>
+                <p>{errorText(language)}: {spells?.error || "Unknown error"}</p>
             </div>
         );
     }
@@ -15,14 +16,15 @@ export default function Spells({ spells,searchTerm }) {
     if (spellsResult.length === 0) {
         return (
             <div className="spells-page">
-                <h2>Spells</h2>
-                <p>No spells found for the provided search term.</p>
+                <h1>{getSearchInfoTitles(language).spells}</h1>
+                <p>{emptyText(language)}</p>
+                
         </div>
     );
 }
 return(
     <div className="spells-page">
-        <h2>Spells</h2>
+        <h1>{getSearchInfoTitles(language).spells}</h1>
         <div className="spells-list">
             {spellsResult.map(spell => (
                 <div key={spell.index} className="spell-card">

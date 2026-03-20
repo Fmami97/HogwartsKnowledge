@@ -17,22 +17,22 @@ export default function CharacterDetails({character,setSearchType,setSearchTerm,
 
         (!character)?(
         <div className="character-details">
-            <h2>Character not found</h2>
+            <h3>Character not found</h3>
             <p>Sorry, we couldn't find the character you're looking for.</p>
             
 
         </div>
         ):
         <div className="character-details">
-            <h2>{character.fullname}</h2>
+            <h3>{character.fullname}</h3>
             <p>{emptyText}</p>
         </div>
     )
     :(
         <div className="column-container">
         <div className="character-details">
-            <h2>{character.fullName}</h2>
             <img src={character.image} alt={character.fullName} id="character-image" />
+            <h3>{character.fullName}</h3>
             <p><strong>{titles.nickname}</strong> {character.nickname || "Unknown"}</p>
             <p><strong>{titles.house}</strong> {character.hogwartsHouse || "Unknown"}</p>
             <p><strong>{titles.birthdate}</strong> {character.birthdate || "Unknown"}</p>

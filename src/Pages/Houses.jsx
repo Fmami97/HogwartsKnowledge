@@ -47,11 +47,11 @@ export default function Houses({ houses,selectedHouse,setSearchType,setSearchTer
     }
 
     return (
-        <div className="column-container">
+        <div className="column-container house-page">
                 <div className="house-card">
                     <h1>{translatedHouse} {houseData.emoji}</h1>
                     <p><strong>{titles.founder}</strong> {houseData.founder}</p>
-                    <div className="row-container"><strong>{titles.colors}</strong>{houseColors(mainColor,secondaryColor)}</div>
+                    <div className="row-container"><p><strong>{titles.colors}</strong></p>{houseColors(mainColor,secondaryColor)}</div>
 
                 </div>
             

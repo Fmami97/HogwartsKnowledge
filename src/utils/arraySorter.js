@@ -4,7 +4,7 @@
 
 //this allows the app to avoid having to fetch the data multiple times, and to have a single source of truth for the data.
 
-// import HogwartsHouses from "../Enums/HogwartsHouses";
+
 //with the provided list of names and characters, this function will return the data
 //of the characters that are children of the provided names
 export function getChildrenInfo(children, characters) {

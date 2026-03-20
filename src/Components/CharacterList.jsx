@@ -33,7 +33,7 @@ export default function CharacterList({ charactersResult , setSearchType,setSear
                              <img src={characterDetails.image} alt={characterDetails.fullName} className="character-images" />
                 
                             <h3>{characterDetails.fullName}</h3>
-                             <p>{getSearchInfoTitles(language).house}: {characterDetails.hogwartsHouse}</p>
+                             <p><strong>{getSearchInfoTitles(language).house}</strong>: {characterDetails.hogwartsHouse}</p>
                          </div>);
 
                 }

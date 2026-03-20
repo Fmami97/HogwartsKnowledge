@@ -27,6 +27,8 @@
     display: flex;
     flex-direction: column;
     gap: 40px;
+    min-width: 13em;
+    max-height: 1000px;
 }
 
 
@@ -48,25 +50,21 @@
 
 }
 
-
-
-h3 {
-    margin: 10px 0 2px 0;
+.character-details h3 {
+    font-size: 26pt;
 }
 
-p {
-    margin: 0px;
-    font-style: italic;
+.character-details p {
+    font-size: 22pt;
 }
+
 
 @media only screen and (min-width:480px) and (max-width: 768px) {
     .characters-list {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
-        gap: 2rem;
         max-height: 1500px;
         overflow-y: auto;
-        scrollbar-color: #616881 #262a33;
     }
 }
 
@@ -98,4 +96,14 @@ p {
         align-self: center;
         border-radius: 50px;
     }
+
+    .character-details p {
+        font-size: 16pt;
+    }
+
+    .character-details h3 {
+        font-size: 20pt;
+    }
+
+
 }

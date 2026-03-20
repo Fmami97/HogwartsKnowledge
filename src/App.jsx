@@ -194,7 +194,7 @@ function App() {
         page = <Houses houses={houses} selectedHouse={selectedHouse} setSearchType= {handleSetSearchType} setSearchTerm={setSearchTerm} language={language}/>;
       break;
         case SearchTypes.SPELLS:
-        page = <Spells spells={spells} searchTerm={searchTerm}/>
+        page = <Spells spells={spells} searchTerm={searchTerm} language={language}/>
         break;
     }
 

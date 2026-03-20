@@ -30,15 +30,6 @@
 }
 
 
-.spell-card h3,
-p {
-    overflow-wrap: break-word;
-}
-
 .spell-card h3 {
     font-size: 15.5pt;
-}
-
-.spell-card p {
-    font-size: 14pt;
 }
