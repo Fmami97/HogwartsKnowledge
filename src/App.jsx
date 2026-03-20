@@ -26,7 +26,7 @@ import Spells from './Pages/Spells';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fas } from '@fortawesome/free-solid-svg-icons'
-
+import { OrbitProgress } from "react-loading-indicators";
 
 function App() {
   
@@ -169,10 +169,7 @@ function App() {
 
   if (isLoading) {
     content =(
-        <div className="loading-state">
-          <div className="loading-text">{loadingText(language)}</div> 
-
-        </div>
+          <OrbitProgress variant="spokes" size="large" color="#616881"  text={loadingText(language)} textColor="" />
     );
   }else if (error) {
     content = (
@@ -216,7 +213,7 @@ function App() {
     <div>
           <header>
             <h1 className="main-title">Hogwarts
-            <FontAwesomeIcon icon="fa-solid fa-wand-sparkles" size="2xl" />
+            <FontAwesomeIcon icon="fa-solid fa-wand-sparkles" size="xl" />
             Knowledge
             </h1>
           </header>

@@ -9,8 +9,8 @@ body {
   justify-content: center;
   align-items: center;
   color: #e2e8f0;
-  overflow-y:auto;
-  scrollbar-color: #616881  #262a33;
+  overflow-y: auto;
+  scrollbar-color: #616881 #262a33;
 }
 
 
@@ -25,10 +25,10 @@ body {
   width: 100%;
   padding: 1rem;
   padding-top: 20px;
-  gap:10px;
+  gap: 10px;
 }
 
-.loading-state, .error-state {
+.error-state {
   background-color: #2d313c;
   border-radius: 15px;
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
@@ -75,25 +75,24 @@ body {
   animation: fadeInScale 0.8s ease-out forwards;
 }
 
-header{
+header {
   background-color: #616881;
-  color:#f7fafc;
-  font-size:22pt;
-  font-weight:bolder;
-  padding:0;
-  margin:0 auto;
-  position:fixed;
-  height:150px;
-  top:0;
-  left:0;
-  right:0;
+  color: #f7fafc;
+  font-size: 22pt;
+  font-weight: bolder;
+  padding: 0;
+  margin: 0 auto;
+  position: fixed;
+  height: 150px;
+  top: 0;
+  left: 0;
+  right: 0;
   background: linear-gradient(to bottom, #616881 0%, #1a1e27 100%);
   z-index: 1000;
 }
 
 .main-title {
-  font-size: 2.8rem;
-  font-weight: 700;
+  font-size: 2em;
   color: #f7fafc;
   text-align: center;
   margin-bottom: 1rem;
@@ -105,20 +104,39 @@ header{
 
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes fadeInScale {
-  from { opacity: 0; transform: scale(0.95); }
-  to { opacity: 1; transform: scale(1); }
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 
 
 @keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.6; }
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.6;
+  }
 }
 
 @media (max-width: 600px) {
@@ -126,14 +144,9 @@ header{
     padding: 2rem;
     margin: 1rem;
   }
-  
+
   .main-title {
-    font-size: 2.2rem;
+    font-size: 1.2em;
   }
-  
-  .button {
-    padding: 1rem 2rem;
-    font-size: 1.1rem;
-  }
-  
+
 }

@@ -26,14 +26,17 @@ export default function Searchbar({searchTerm, setSearchTerm,searchType ,setSear
             :
             <div className="row-container">
             <input 
+                id="search-textbox"
                 type="text" 
                 value={searchTerm} 
                 onChange={(e) => setSearchTerm(e.target.value)} 
                 className="search-input"
                 placeholder={searchIntoTitles.search}
             />
-            <button className="random-button" onClick={handleRandomClick}>{searchIntoTitles.random}</button>
-            <button onClick={()=>setSearchTerm("")}>{searchIntoTitles.reset}</button>
+            <div className="search-buttons"> 
+                <button className="random-button" onClick={handleRandomClick}>{searchIntoTitles.random}</button>
+                <button onClick={()=>setSearchTerm("")}>{searchIntoTitles.reset}</button>
+            </div>
             </div>
             }
         </div>

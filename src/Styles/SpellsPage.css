@@ -1,41 +1,44 @@
-
-
-.spell-card{
+.spell-card {
     padding: 20px;
-    display:flex;
+    display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
     justify-content: center;
-    width:300px;
-    border:3px #616881 solid; 
-    border-radius: 20px;
+    width: 14em;
+    border: 3px #616881 solid;
+    border-radius: 50px;
 }
 
-.spells-page{
-    padding:20px;
+.spells-page {
+    padding: 20px;
     display: flex;
     flex-direction: column;
     gap: 40px;
 }
 
 
-.spells-list{
-    display:flex;
+.spells-list {
+    display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    gap:2rem;
-    max-height:1000px;
+    gap: 2rem;
+    max-height: 1000px;
 
     justify-content: space-evenly;
     overflow-y: auto;
-    scrollbar-color: #616881  #262a33;
+    scrollbar-color: #616881 #262a33;
 }
 
 
-.spell-card h3,p{
+.spell-card h3,
+p {
     overflow-wrap: break-word;
 }
-.spell-card p{
-    margin:5px 0px;
-    font-size: 16pt;
+
+.spell-card h3 {
+    font-size: 15.5pt;
+}
+
+.spell-card p {
+    font-size: 14pt;
 }

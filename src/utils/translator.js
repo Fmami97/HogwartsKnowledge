@@ -89,7 +89,7 @@ export function getCharactersInfoTitles(selectedLanguage) {
         case Languages.ENGLISH:
             return { characters: "Characters", nickname: "Nickname : ", house: "House : ", birthdate: "Birthdate : ", interpretedBy: "Actor / Actress : ", children: "Children" }
         case Languages.FRENCH:
-            return { characters: "Personnages", nickname: "Surnom : ", house: "Maison : ", birthdate: "Date de naissance : ", interpretedBy: "Acteur / ctrice : ", children: "Enfants" }
+            return { characters: "Personnages", nickname: "Surnom : ", house: "Maison : ", birthdate: "Date de naissance : ", interpretedBy: "Acteur / Actrice : ", children: "Enfants" }
 
         case Languages.ITALIAN:
             return { characters: "Personaggi", nickname: "Soprannome : ", house: "Casa : ", birthdate: "Data di nascita : ", interpretedBy: "Attore / Attrice : ", children: "Figli" }

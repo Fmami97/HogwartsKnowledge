@@ -30,7 +30,7 @@ export default function CharacterList({ charactersResult , setSearchType,setSear
                     }
                     else{
                     items.push(<div key={characterDetails.index+"_"+characterDetails.fullname} className="character-card" onClick={()=>{handleClick(characterDetails.fullName)}}>
-                             <img src={characterDetails.image} alt={characterDetails.fullName} className="character-image" />
+                             <img src={characterDetails.image} alt={characterDetails.fullName} className="character-images" />
                 
                             <h3>{characterDetails.fullName}</h3>
                              <p>{getSearchInfoTitles(language).house}: {characterDetails.hogwartsHouse}</p>
