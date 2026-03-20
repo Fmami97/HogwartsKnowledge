@@ -1,5 +1,5 @@
 
-const API_URL = "https://potterapi-fedeperin.vercel.app/"
+const API_URL = "https://potterapi-fedeperin.vercel.app"
 
 
 //returns all books written by J.K. Rowling in the desired language

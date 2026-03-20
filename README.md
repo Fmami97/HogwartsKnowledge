@@ -29,6 +29,9 @@ This project's aim is for academic / personal use only, and uses an API found in
 Since Cors policies don't allow localhost to be used to fetch data on a server, you will need an extension that 
 provides access to your website, or run your app through a server
 
+**UPDATE**
+I realized I wasn't fetching the data properly, since I had a second '/' inside my URL, it should now work without the extension.
+
 
 # MAKE A PRODUCTION BUILD
 once satisfied with all changes build the project to place it in your web domain
