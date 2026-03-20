@@ -4,7 +4,7 @@
     flex-direction: column;
     flex-wrap: nowrap;
     justify-content: center;
-    width: 14em;
+    width: 12em;
     border: 3px #616881 solid;
     border-radius: 50px;
 }
@@ -32,4 +32,17 @@
 
 .spell-card h3 {
     font-size: 15.5pt;
+}
+
+@media only screen and (min-width: 480px)and (max-width: 768px) {
+    .spells-list {
+        overflow-y: visible;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .spells-list {
+        overflow-y: visible;
+    }
+
 }

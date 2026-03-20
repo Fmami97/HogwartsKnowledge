@@ -15,6 +15,7 @@ import HogwartsHouses from './Enums/HogwartsHouses';
 //COMPONENTS
 import Searchbar from './Components/Searchbar';
 import LanguageSelection from './Components/LanguageSelection';
+import ScrollButton from "./Components/ScrollButton";
 //PAGES
 import Characters from './Pages/Characters';
 import Books from './Pages/Books';
@@ -23,10 +24,11 @@ import Spells from './Pages/Spells';
 
 
 //LIBRARIES
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { fas } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { fas } from '@fortawesome/free-solid-svg-icons';
 import { OrbitProgress } from "react-loading-indicators";
+
 
 function App() {
   
@@ -50,6 +52,7 @@ function App() {
 
   const [isOnline,setIsOnline] = useState(navigator.onLine);
   const [offlineMode,setOfflineMode] = useState(!isOnline);
+  const [btnScrollVisible,setBtnScrollVisible] = useState(false);
 
   useEffect(()=>{
     const handleOnline = ()=>setIsOnline(true);
@@ -117,6 +120,17 @@ function App() {
   }, [language,isOnline,offlineMode]);
 
 
+    useEffect(() => {
+    const handleScroll = () => {
+      setBtnScrollVisible(window.scrollY > 250);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+
   function handleSetSearchType(newSearchType){
     setSearchType(newSearchType);
     setSearchTerm("");
@@ -165,7 +179,6 @@ function App() {
 
 
   let content;
-
 
   if (isLoading) {
     content =(
@@ -222,8 +235,11 @@ function App() {
             <LanguageSelection language={language} setLanguage={handleSetLanguage} languages={Object.values(Languages)} />
 
           {content}
+          
+          <ScrollButton visible={btnScrollVisible}/>
           {offlineMode && <div className="offline-mode"><h2>{offlineModeText(language)}</h2></div>}
 
+      
         </div>
     </div>
   );

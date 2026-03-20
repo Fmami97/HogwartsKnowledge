@@ -63,8 +63,7 @@
     .characters-list {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
-        max-height: 1500px;
-        overflow-y: auto;
+        overflow-y: visible;
     }
 }
 
@@ -77,10 +76,7 @@
     .characters-list {
         display: grid;
         grid-template-columns: repeat(1, 1fr);
-        gap: 2rem;
-        max-height: 1500px;
-        overflow-y: auto;
-        scrollbar-color: #616881 #262a33;
+        overflow-y: visible;
     }
 
     .character-images {
